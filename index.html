@@ -1,1 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AR</title>
+  <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+  <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden;
+    }
+    .arjs-loader {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 18px;
+      color: white;
+      background: rgba(0, 0, 0, 0.7);
+      padding: 10px 20px;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+  <!-- AR.js Scene -->
+  <a-scene
+    vr-mode-ui="enabled: false"
+    embedded
+    arjs="sourceType: webcam; debugUIEnabled: false;"
+  >
+    <!-- Loader -->
+    <div class="arjs-loader">Loading AR scene...</div>
 
+    <!-- GLTF Model -->
+    <a-entity
+      gltf-model="assets/models/treasure.glb"
+      scale="0.5 0.5 0.5"
+      position="0 0 -2"
+      rotation="0 180 0"
+    ></a-entity>
+
+    <!-- Camera -->
+    <a-camera-static />
+  </a-scene>
+
+  <!-- Hide loader once scene is loaded -->
+  <script>
+    document.querySelector('a-scene').addEventListener('loaded', function () {
+      document.querySelector('.arjs-loader').style.display = 'none';
+    });
+  </script>
+</body>
+</html>
